@@ -70,13 +70,13 @@ while running:
 
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_LEFT:
-                snakeX_change = -1
+                snakeX_change = -.5
             if event.key == pygame.K_RIGHT:
-                snakeX_change = .1
+                snakeX_change = .5
             if event.key == pygame.K_UP:
-                snakeY_change = -.1
+                snakeY_change = -.5
             if event.key == pygame.K_DOWN:
-                snakeY_change = .1
+                snakeY_change = .5
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
                 snakeX_change = 0
@@ -93,7 +93,6 @@ while running:
     if snakeY > 550 or snakeY < 5 or snakeX > 735 or snakeX < 10:
         snakeX = 2000
         game_over_text()
-
 
     snake(snakeX, snakeY)
     food(foodX, foodY)
