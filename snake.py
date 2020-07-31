@@ -24,7 +24,7 @@ snakeY_change = 0
 foodImg = pygame.image.load('fruit.png')
 foodX = random.randint(10, 735)
 foodY = random.randint(10, 545)
-food_state = ready
+
 
 # score
 score = 0
@@ -33,7 +33,7 @@ score = 0
 # collision
 def is_collision(snakeX, snakeY, foodX, foodY):
     distance = math.sqrt((math.pow(snakeX - foodX, 2)) + (math.pow(snakeY - foodY, 2)))
-    if distance == 47:
+    if distance < 47:
         return True
     else:
         return False
@@ -74,6 +74,8 @@ while running:
         if collision:
             score += 1
             print(score)
+            foodX = random.randint(10, 735)
+            foodY = random.randint(10, 545)
 
     snakeX += snakeX_change
     snakeY += snakeY_change
