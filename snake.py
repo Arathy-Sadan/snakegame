@@ -29,6 +29,9 @@ foodY = random.randint(10, 545)
 score_value = 0
 font = pygame.font.Font("freesansbold.ttf", 32)
 
+# game over
+over_font = pygame.font.Font("freesansbold.ttf", 64)
+
 
 # collision
 def is_collision(snakeX, snakeY, foodX, foodY):
@@ -52,6 +55,11 @@ def show_score(x, y):
     screen.blit(score, (x, y))
 
 
+def game_over_text():
+    game_over = over_font.render("Game Over ", True, (0, 255, 0))
+    screen.blit(game_over, (200, 250))
+
+
 # game loop
 running = True
 while running:
@@ -62,7 +70,7 @@ while running:
 
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_LEFT:
-                snakeX_change = -.1
+                snakeX_change = -1
             if event.key == pygame.K_RIGHT:
                 snakeX_change = .1
             if event.key == pygame.K_UP:
@@ -80,9 +88,13 @@ while running:
             score_value += 1
             foodX = random.randint(10, 735)
             foodY = random.randint(10, 545)
-
     snakeX += snakeX_change
     snakeY += snakeY_change
+    if snakeY > 550 or snakeY < 5 or snakeX > 735 or snakeX < 10:
+        snakeX = 2000
+        game_over_text()
+
+
     snake(snakeX, snakeY)
     food(foodX, foodY)
     show_score(10, 10)
