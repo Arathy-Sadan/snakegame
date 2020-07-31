@@ -16,6 +16,8 @@ pygame.display.set_icon(logo)
 snakeImg = pygame.image.load('snakeplayer.png')
 snakeX = 370
 snakeY = 450
+snakeX_change = 0
+snakeY_change = 0
 
 # food figure
 foodImg = pygame.image.load('fruit.png')
@@ -34,11 +36,27 @@ def food(x, y):
 # game loop
 running = True
 while running:
-
+    screen.fill((0, 0, 0))
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
 
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_LEFT:
+                snakeX_change = -.1
+            if event.key == pygame.K_RIGHT:
+                snakeX_change = .1
+            if event.key == pygame.K_UP:
+                snakeY_change = -.1
+            if event.key == pygame.K_DOWN:
+                snakeY_change = .1
+        if event.type == pygame.KEYUP:
+            if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
+                snakeX_change = 0
+            if event.key == pygame.K_UP or event.key == pygame.K_DOWN:
+                snakeY_change = 0
+    snakeX += snakeX_change
+    snakeY += snakeY_change
     snake(snakeX, snakeY)
     food(foodX, foodY)
     pygame.display.update()
