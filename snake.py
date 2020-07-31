@@ -25,9 +25,9 @@ foodImg = pygame.image.load('fruit.png')
 foodX = random.randint(10, 735)
 foodY = random.randint(10, 545)
 
-
 # score
-score = 0
+score_value = 0
+font = pygame.font.Font("freesansbold.ttf", 32)
 
 
 # collision
@@ -45,6 +45,11 @@ def snake(x, y):
 
 def food(x, y):
     screen.blit(foodImg, (x, y))
+
+
+def show_score(x, y):
+    score = font.render("Score : " + str(score_value), True, (255, 255, 255))
+    screen.blit(score, (x, y))
 
 
 # game loop
@@ -72,8 +77,7 @@ while running:
         # collision
         collision = is_collision(snakeX, snakeY, foodX, foodY)
         if collision:
-            score += 1
-            print(score)
+            score_value += 1
             foodX = random.randint(10, 735)
             foodY = random.randint(10, 545)
 
@@ -81,4 +85,5 @@ while running:
     snakeY += snakeY_change
     snake(snakeX, snakeY)
     food(foodX, foodY)
+    show_score(10, 10)
     pygame.display.update()
